@@ -158599,7 +158599,7 @@ MonoBehaviour:
   bomber: 0
   boss_fire: 0
   boss_tank: 0
-  life: 50
+  life: 25
   start_life: 0
   damage: 0
   explos_prefab: {fileID: 0}
