@@ -17,8 +17,7 @@ public class Fire_enemy : MonoBehaviour
     {
         //anim.SetTrigger("move");
         player = GameObject.FindGameObjectWithTag("Player");
-        cur_pos = Random.Range(0, min_max_pos.Length);
-        transform.position = new Vector3(min_max_pos[cur_pos], transform.position.y, transform.position.z);
+        transform.position = new Vector3(Random.Range(min_max_pos[0], min_max_pos[min_max_pos.Length - 1]), transform.position.y, transform.position.z);
         fire_timer = Player_stats.Instance.enemy_fire_time;
         move_timer = Random.Range(1f, 2f);
     }
@@ -48,20 +47,29 @@ public class Fire_enemy : MonoBehaviour
             }
             else
             {
-                    Vector3 targetDirection = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 5) - gameObject.transform.position;
+                    Vector3 targetDirection = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z + 5) - gameObject.transform.position;
                     float singleStep = Player_stats.Instance.up_speed * Time.deltaTime;
                     Vector3 newDirection = Vector3.RotateTowards(gameObject.transform.forward, targetDirection, singleStep, 0.0f);
                     gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
             }
 
             if(transform.position.z <= player.transform.position.z)
-            {
-                end = true;
+            {                
                 Player_controll.Instance.Cleare_enemy();                
-                transform.LookAt(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z));
                 StopAllCoroutines();
                 StartCoroutine(Fire_on(0.2f, true));
+                end = true;
             }
+        }
+        else
+        {
+            if (!dead)
+            {
+                Vector3 targetDirection = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z + 5) - gameObject.transform.position;
+                float singleStep = Player_stats.Instance.up_speed * Time.deltaTime;
+                Vector3 newDirection = Vector3.RotateTowards(gameObject.transform.forward, targetDirection, singleStep, 0.0f);
+                gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
+            }           
         }
     }  
     void Change_move()

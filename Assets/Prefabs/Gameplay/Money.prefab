@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 52066974934022128}
   - component: {fileID: 52066974934022129}
   - component: {fileID: 52066974934022132}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Money
   m_TagString: Respawn
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1843363858498662, guid: df9e9f9e0ab716847be4c7cc44fe5af4, type: 3}
       propertyPath: m_Layer
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4564006467475938, guid: df9e9f9e0ab716847be4c7cc44fe5af4, type: 3}
       propertyPath: m_RootOrder
@@ -227,7 +227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 118250, guid: a79f8048fa75d6c449d730e96bb836fa, type: 3}
       propertyPath: m_Layer
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 118250, guid: a79f8048fa75d6c449d730e96bb836fa, type: 3}
       propertyPath: m_IsActive
@@ -235,15 +235,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 124126, guid: a79f8048fa75d6c449d730e96bb836fa, type: 3}
       propertyPath: m_Layer
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 165630, guid: a79f8048fa75d6c449d730e96bb836fa, type: 3}
       propertyPath: m_Layer
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 172720, guid: a79f8048fa75d6c449d730e96bb836fa, type: 3}
       propertyPath: m_Layer
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 436358, guid: a79f8048fa75d6c449d730e96bb836fa, type: 3}
       propertyPath: m_RootOrder

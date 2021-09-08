@@ -8,7 +8,8 @@ public class Player_controll : MonoBehaviour
     public static Player_controll Instance;
     [SerializeField] private GameObject _camera, cur_enemy;   
     [SerializeField] private int pos_state;
-    [SerializeField] private float fire_speed, speed, max_speed, jump_target_x;
+    [SerializeField] private float fire_speed, max_speed;
+    public float speed;
     public bool game, move, jump, up_jump, down, swipe_controll, enemy_attack, back;    
     [SerializeField] Transform[] fire_pos;
     [SerializeField] private float[] xx_pos;
@@ -30,10 +31,7 @@ public class Player_controll : MonoBehaviour
             Instance = this;
     }
     void Start()
-    {
-        print(up_anim.gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().materials[0]);
-        
-        
+    {                
         max_speed = Player_stats.Instance.move_speed;
 
         swipe_controll = Player_stats.Instance.swipe_controll;
@@ -183,7 +181,7 @@ public class Player_controll : MonoBehaviour
                    
                     RaycastHit hit;
                     Physics.Raycast(fire_pos[Player_ugrade.Instance.state_id].position, fire_pos[Player_ugrade.Instance.state_id].TransformDirection(Vector3.forward), out hit, Player_stats.Instance.enemy_distance);
-                    if (hit.collider != null && hit.collider.gameObject.tag == "Enemy")// && hit.collider.gameObject == cur_enemy)
+                    if (hit.collider != null && hit.collider.gameObject.tag == "Enemy" && hit.collider.gameObject == cur_enemy)
                     {
                         if (fire_speed <= 0 && !down) // --- auto shoot timer
                         {

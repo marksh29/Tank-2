@@ -32,7 +32,6 @@ public class Boss_fire : MonoBehaviour
     }   
     void Change_move()
     {
-        print("Change_move");
         anim.SetTrigger("move");
         float pos = Random.Range(min_max_pos[0], min_max_pos[min_max_pos.Length - 1]);
         float time = Mathf.Abs(transform.position.x - pos) / 3;

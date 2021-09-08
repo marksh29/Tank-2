@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 8713916693992739153}
   - component: {fileID: 5709859604996999224}
   - component: {fileID: 7293645607603036322}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: bridge
   m_TagString: Ground
   m_Icon: {fileID: 0}

@@ -44,15 +44,19 @@ public class Player_stats : MonoBehaviour
     public float ammo_fly_time;
 
     [HeaderAttribute("Скорость движения врага")]
-    public float enemy_speed;
-    [HeaderAttribute("Частота атаки врага")]
-    public float enemy_fire_time;
+    public float enemy_speed;    
     [HeaderAttribute("Сила атаки пули врага")]
     public float enemy_ammo_power;
     [HeaderAttribute("Скорость движения вражеской пули")]
     public float enemy_ammo_speed;
     [HeaderAttribute("Скорость смены полосы")]
     public float enemy_change_speed;
+    [HeaderAttribute("Частота атаки врага (пехота)")]
+    public float enemy_fire_time;
+    [HeaderAttribute("Частота атаки врага (босс стреляющий)")]
+    public float boss_fire_time;
+    [HeaderAttribute("Частота атаки врага (танк)")]
+    public float tank_fire_time;
 
     private void Awake()
     {

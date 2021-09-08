@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 2367379157378416540}
   - component: {fileID: 3659404210043831281}
   - component: {fileID: 8968484079535964699}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: bridge
   m_TagString: Ground
   m_Icon: {fileID: 0}

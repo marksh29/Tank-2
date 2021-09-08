@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] Image life_image;
-    [SerializeField] public bool fire_enemy, bomber, boss_fire;
+    [SerializeField] public bool fire_enemy, bomber, boss_fire, boss_tank;
     [SerializeField] float life, start_life;
     [SerializeField] float damage;
     [SerializeField] GameObject explos_prefab;
@@ -62,14 +62,13 @@ public class Enemy : MonoBehaviour
     {
         if(coll.gameObject.tag == "Player")// && ((!Player_controll.Instance.jump && fire_pos == "down") || fire_pos == ""))
         {
-            if(!Player_controll.Instance.jump && coll.gameObject.tag !=  "Barell")
+            if(!Player_controll.Instance.jump && gameObject.tag != "Barell")
             {
                 Player_hp.Instance.Damage(damage);
                 Damage(10);
             }
             if (Player_controll.Instance.jump && fire_enemy)
             {
-                //GetComponent<Fire_enemy>().Eojy();
                 Damage(10);
             }
             else
