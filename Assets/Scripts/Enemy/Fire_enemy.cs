@@ -18,7 +18,7 @@ public class Fire_enemy : MonoBehaviour
         //anim.SetTrigger("move");
         player = GameObject.FindGameObjectWithTag("Player");
         transform.position = new Vector3(Random.Range(min_max_pos[0], min_max_pos[min_max_pos.Length - 1]), transform.position.y, transform.position.z);
-        fire_timer = Player_stats.Instance.enemy_fire_time;
+        //fire_timer = Player_stats.Instance.enemy_fire_time;
         move_timer = Random.Range(1f, 2f);
     }
     void Start()

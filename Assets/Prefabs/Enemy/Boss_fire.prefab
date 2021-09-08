@@ -140,9 +140,10 @@ MonoBehaviour:
   fire_enemy: 0
   bomber: 0
   boss_fire: 1
+  boss_tank: 0
   life: 30
   start_life: 0
-  damage: 0.1
+  damage: 0
   explos_prefab: {fileID: 7461678461574903005}
   mesh: []
 --- !u!54 &1508020751836934947

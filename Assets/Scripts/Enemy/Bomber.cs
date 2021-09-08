@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bomber : MonoBehaviour
 {
     [SerializeField] GameObject expl_prefab, player, body;
-    [SerializeField] float speed;
+    [SerializeField] float speed, damage;
     bool dead;
     void Start()
     {
@@ -42,7 +42,7 @@ public class Bomber : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Player_hp.Instance.Damage(0.2f);
+            Player_hp.Instance.Damage(damage);
             Dead();
         }
     }

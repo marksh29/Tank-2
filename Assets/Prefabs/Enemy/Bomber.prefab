@@ -14532,6 +14532,7 @@ MonoBehaviour:
   player: {fileID: 0}
   body: {fileID: 1939748079308658270}
   speed: 5
+  damage: 0.2
 --- !u!114 &6093710135995301384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14551,7 +14552,7 @@ MonoBehaviour:
   boss_tank: 0
   life: 1
   start_life: 0
-  damage: 0.5
+  damage: 0
   explos_prefab: {fileID: 6093710135679912507}
   mesh: []
 --- !u!1 &6093710136157007502

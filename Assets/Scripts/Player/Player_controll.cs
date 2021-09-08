@@ -70,7 +70,7 @@ public class Player_controll : MonoBehaviour
                     RaycastHit hit;
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     Physics.Raycast(ray, out hit);
-                    if (hit.collider != null && hit.collider.gameObject.tag == "Enemy")
+                    if (hit.collider != null && hit.collider.gameObject.tag == "Enemy" && hit.collider.gameObject.transform.position.z > transform.position.z)
                     {
                         cur_enemy = hit.collider.gameObject;
                     }
@@ -81,13 +81,9 @@ public class Player_controll : MonoBehaviour
                     if (duble_clik_time > 0)
                     {
                         if (Mathf.Abs(Camera.main.WorldToScreenPoint(transform.position).y - Input.mousePosition.y) > Mathf.Abs(Camera.main.WorldToScreenPoint(transform.position).x - Input.mousePosition.x))
-                        {
                             Up_jump();
-                        }
                         else
-                        {
                             Jump(Input.mousePosition.x - Camera.main.WorldToScreenPoint(transform.position).x > 0 ? 1 : 0);
-                        }                        
                     }
                     else
                         duble_clik_time = 0.3f;
