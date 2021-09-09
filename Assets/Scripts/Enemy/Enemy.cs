@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] Image life_image;
-    [SerializeField] public bool fire_enemy, bomber, boss_fire, boss_tank;
+    [SerializeField] public bool fire_enemy, bomber, boss_fire, boss_tank, firework_enemy;
     [SerializeField] float life, start_life;
     [SerializeField] float damage;
     [SerializeField] GameObject explos_prefab;
@@ -49,9 +49,12 @@ public class Enemy : MonoBehaviour
             }
             else if (fire_enemy)
             {
-                GetComponent<Fire_enemy>().Dead();
-                //Player_controll.Instance.enemy_attack = false;               
-            }               
+                GetComponent<Fire_enemy>().Dead();             
+            }
+            else if (firework_enemy)
+            {
+                GetComponent<Firework_enemy>().Dead();           
+            }
             else
             {
                 Destroy(gameObject, 2);

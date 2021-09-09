@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_bullet : MonoBehaviour
 {
-    Vector3 target;
+    public Vector3 target;
     [SerializeField] Transform player;
     [SerializeField] GameObject expl_other, expl_pl;
     [SerializeField] private float down_time;

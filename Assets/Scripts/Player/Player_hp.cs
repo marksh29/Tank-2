@@ -28,6 +28,7 @@ public class Player_hp : MonoBehaviour
     }
     public void Damage(float count)
     {
+        print(count);
         life.value -= count;
         StartCoroutine(Blood_on());
 
