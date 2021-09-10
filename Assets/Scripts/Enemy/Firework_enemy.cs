@@ -108,7 +108,7 @@ public class Firework_enemy : MonoBehaviour
         }
         StopAllCoroutines();       
         anim.SetTrigger("dead");
-        GetComponent<CapsuleCollider>().enabled = false;
+        Destroy(gameObject.GetComponent<CapsuleCollider>());
         Emojy();
     }
     public void Emojy()

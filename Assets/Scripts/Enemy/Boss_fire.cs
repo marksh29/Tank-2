@@ -116,6 +116,6 @@ public class Boss_fire : MonoBehaviour
         StopAllCoroutines();        
         dead = true;
         anim.SetTrigger("dead");
-        GetComponent<CapsuleCollider>().enabled = false;
+        Destroy(gameObject.GetComponent<CapsuleCollider>());
     }
 }

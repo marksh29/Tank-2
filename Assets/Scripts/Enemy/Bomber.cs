@@ -29,7 +29,7 @@ public class Bomber : MonoBehaviour
     public void Dead()
     {
         dead = true;
-        GetComponent<CapsuleCollider>().enabled = false;
+        Destroy(gameObject.GetComponent<CapsuleCollider>());
         expl_prefab.SetActive(true);
         body.SetActive(false);        
     }  
