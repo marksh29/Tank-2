@@ -7,7 +7,7 @@ public class Money : MonoBehaviour
     [SerializeField] float speed, force;
     void Start()
     {
-        Drop();
+        //Drop();
         speed = Random.Range(50f, 200f);
     }
     private void Update()

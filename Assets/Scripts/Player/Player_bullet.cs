@@ -33,7 +33,7 @@ public class Player_bullet : MonoBehaviour
             coll.gameObject.GetComponent<Enemy>().Damage(Player_stats.Instance.ammo_power);
             gameObject.SetActive(false);
         }
-        else 
+        else if(coll.gameObject.tag != "Respawn")
         {
             GameObject expl = Instantiate(expl_other, transform.position, transform.rotation) as GameObject;
             gameObject.SetActive(false);

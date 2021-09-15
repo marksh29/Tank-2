@@ -74,6 +74,10 @@ public class Player_controll : MonoBehaviour
                     {
                         cur_enemy = hit.collider.gameObject;
                     }
+                    if (hit.collider != null && hit.collider.gameObject.tag == "Player")
+                    {
+                        print("pl");
+                    }
                 }               
 
                 if (!move)

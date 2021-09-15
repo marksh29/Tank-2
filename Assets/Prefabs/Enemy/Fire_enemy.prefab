@@ -218,6 +218,7 @@ MonoBehaviour:
   bomber: 0
   boss_fire: 0
   boss_tank: 0
+  firework_enemy: 0
   life: 2
   start_life: 0
   damage: 0.1
@@ -295,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money_prefab: {fileID: 52066974934022130, guid: f859f3d80058cb743a2dcd0de2ade45a,
     type: 3}
+  xx: 6
 --- !u!1 &9055318603080502235
 GameObject:
   m_ObjectHideFlags: 0

@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
     {
         if(coll.gameObject.tag == "Player")// && ((!Player_controll.Instance.jump && fire_pos == "down") || fire_pos == ""))
         {
-            if(!Player_controll.Instance.jump && gameObject.tag != "Barell")
+            if(!Player_controll.Instance.jump && gameObject.tag == "Barell")
             {
                 Player_hp.Instance.Damage(damage);
                 Damage(10);

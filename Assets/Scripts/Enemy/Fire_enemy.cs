@@ -27,7 +27,7 @@ public class Fire_enemy : MonoBehaviour
     }
     void Update()
     {
-        if (!end && !dead && transform.position.z - player.transform.position.z < Player_stats.Instance.enemy_distance)
+        if (!end && !dead && transform.position.z - player.transform.position.z < Player_stats.Instance.attack_distance)
         {
             if(!stay)
             {
@@ -111,10 +111,10 @@ public class Fire_enemy : MonoBehaviour
     {
         GetComponent<Drop_money>().Spawn(Random.Range(3, 5));
         dead = true;
-        for (int i = 0; i < list.Count; i++)
-        {
-            list[i].SetActive(false);
-        }
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    list[i].SetActive(false);
+        //}
         StopAllCoroutines();       
         anim.SetTrigger("dead");
         Destroy(gameObject.GetComponent<CapsuleCollider>());
