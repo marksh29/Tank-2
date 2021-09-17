@@ -9,17 +9,15 @@ public class Fire_enemy : MonoBehaviour
     [SerializeField] int cur_pos;
     [SerializeField] float[] min_max_pos;
     [SerializeField] float speed, fire_timer, move_timer, bullet_start_pos;
-    public bool stay, dead, fire, end;
+    public bool stay, dead, fire, end, move;
     [SerializeField] GameObject[] emojy;
     [SerializeField] List<GameObject> list;
+    Vector3 move_target;
 
     private void OnEnable()
     {
-        //anim.SetTrigger("move");
-        player = GameObject.FindGameObjectWithTag("Player");
-        transform.position = new Vector3(Random.Range(min_max_pos[0], min_max_pos[min_max_pos.Length - 1]), transform.position.y, transform.position.z);
-        //fire_timer = Player_stats.Instance.enemy_fire_time;
-        move_timer = Random.Range(1f, 2f);
+        anim.SetTrigger("fire");
+        player = GameObject.FindGameObjectWithTag("Player");       
     }
     void Start()
     {
@@ -27,23 +25,42 @@ public class Fire_enemy : MonoBehaviour
     }
     void Update()
     {
-        if (!end && !dead && transform.position.z - player.transform.position.z < Player_stats.Instance.attack_distance)
+        if (!end && !dead && transform.position.z - player.transform.position.z < Player_stats.Instance.enemy_distance)
         {
             if(!stay)
             {
-                transform.Translate(Vector3.forward * Player_stats.Instance.enemy_speed * Time.deltaTime);
-
-                move_timer -= Time.deltaTime;
-                if (move_timer <= 0)
-                    Change_move();
-
-                fire_timer -= Time.deltaTime;
-                if (fire_timer <= 0 && (transform.position.z - player.transform.position.z < Player_stats.Instance.attack_distance))
+                if(move)
                 {
-                    fire_timer = Player_stats.Instance.enemy_fire_time;
-                    StopAllCoroutines();
-                    StartCoroutine(Fire_on(0.5f, false));
-                }                    
+                    Vector3 targetDirection = move_target - transform.position;
+                    float singleStep = Player_stats.Instance.up_speed * Time.deltaTime;
+                    Vector3 newDirection = Vector3.RotateTowards(gameObject.transform.forward, targetDirection, singleStep, 0.0f);
+                    gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
+
+                    transform.position = Vector3.MoveTowards(transform.position, move_target, speed * Time.deltaTime);
+                    if (transform.position == move_target)
+                    {
+                        move_timer = Random.Range(2f, 5f);
+                        anim.SetTrigger("fire");
+                        move = false;
+                    }
+                }
+                else
+                {
+                    move_timer -= Time.deltaTime;
+                    if (move_timer <= 0)
+                    {
+                        Change_move();
+                        anim.SetTrigger("move");
+                    }                       
+                   
+                    fire_timer -= Time.deltaTime;
+                    if (fire_timer <= 0 && (transform.position.z - player.transform.position.z < Player_stats.Instance.attack_distance))
+                    {
+                        fire_timer = Player_stats.Instance.enemy_fire_time;
+                        StopAllCoroutines();
+                        StartCoroutine(Fire_on(0.5f, false));
+                    }
+                }                              
             }
             else
             {
@@ -74,23 +91,24 @@ public class Fire_enemy : MonoBehaviour
     }  
     void Change_move()
     {
-        move_timer = Random.Range(2f, 5f);        
-        float pos = Random.Range(min_max_pos[0], min_max_pos[min_max_pos.Length - 1]);
-        float time = Mathf.Abs(transform.position.x - pos) / 3;
-        StartCoroutine(DoMove(time / Player_stats.Instance.enemy_change_speed, pos));
-    }
-    private IEnumerator DoMove(float time, float xx)
-    {
-        Vector2 startPosition = transform.position;
-        float startTime = Time.realtimeSinceStartup;
-        float fraction = 0f;
-        while (fraction < 1f)
-        {
-            fraction = Mathf.Clamp01((Time.realtimeSinceStartup - startTime) / time);
-            transform.position = Vector3.Lerp(new Vector3(startPosition.x, transform.position.y, transform.position.z), new Vector3(xx, transform.position.y, transform.position.z), fraction);
-            yield return null;
-        }
-    }
+        anim.SetTrigger("move");
+        Vector3 pos = new Vector3(Random.Range(min_max_pos[0], min_max_pos[min_max_pos.Length - 1]), 0, transform.position.z + Random.Range(3, 13));
+        move_target = pos;
+        move = true;        
+    }     
+    //private IEnumerator DoMove(float time, Vector3 pos)
+    //{
+    //    //Vector2 startPosition = transform.position;
+    //    float startTime = Time.realtimeSinceStartup;
+    //    float fraction = 0f;
+    //    while (fraction < 1f)
+    //    {
+    //        fraction = Mathf.Clamp01((Time.realtimeSinceStartup - startTime) / time);
+    //        transform.position = Vector3.Lerp(transform.position, pos, fraction);
+    //        yield return null;
+    //    }
+    //    Full_stop();
+    //}
     IEnumerator Fire_on(float time, bool end_bullet)
     {
         anim.SetTrigger("fire");
@@ -105,11 +123,14 @@ public class Fire_enemy : MonoBehaviour
         yield return new WaitForSeconds(1);
         fire_timer = Player_stats.Instance.enemy_fire_time;       
         stay = false;
-        anim.SetTrigger("move");
+        Change_move();
+        //anim.SetTrigger("move");
     }
+
+
     public void Dead()
     {
-        GetComponent<Drop_money>().Spawn(Random.Range(3, 5));
+        GetComponent<Drop_money>().Spawn();
         dead = true;
         //for (int i = 0; i < list.Count; i++)
         //{
@@ -125,5 +146,30 @@ public class Fire_enemy : MonoBehaviour
         GameObject obj = Instantiate(emojy[Random.Range(0, emojy.Length)], player.transform.parent) as GameObject;
         obj.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2, player.transform.position.z + 5);
         Destroy(obj, 2);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag != "Player" && other.gameObject.tag != "Respawn")
+        {
+            print("stop");
+            if(other.transform.position.x > transform.position.x)
+            {
+                move_target = new Vector3((other.transform.position.x > -9 ? other.transform.position.x - 4 : -13), move_target.y, move_target.z);
+            }
+            else
+            {
+                move_target = new Vector3((other.transform.position.x < 9 ? other.transform.position.x + 4 : 13), move_target.y, move_target.z);
+            }
+            //Full_stop();
+        }
+    }
+    void Full_stop()
+    {
+        move = false;
+        anim.SetTrigger("fire");
+        //Vector3 targetDirection = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z + 5) - gameObject.transform.position;
+        //float singleStep = Player_stats.Instance.up_speed * Time.deltaTime;
+        //Vector3 newDirection = Vector3.RotateTowards(gameObject.transform.forward, targetDirection, singleStep, 0.0f);
+        //gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
     }
 }

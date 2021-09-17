@@ -150,6 +150,12 @@ public class Player_controll : MonoBehaviour
     {
         if (cur_enemy == null)
         {
+            Vector3 targetDirection = new Vector3(up_anim.gameObject.transform.position.x, up_anim.gameObject.transform.position.y, up_anim.gameObject.transform.position.z) - up_anim.gameObject.transform.position;
+            //Vector3 targetDirection = new Vector3(0, 0, 0);
+            float singleStep = Player_stats.Instance.up_speed * Time.deltaTime;
+            Vector3 newDirection = Vector3.RotateTowards(up_anim.gameObject.transform.forward, targetDirection, singleStep, 0.0f);
+            up_anim.gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
+
             enemys = new GameObject[0];
             enemys = GameObject.FindGameObjectsWithTag("Enemy");
             for (int i = 0; i < enemys.Length; i++)
@@ -157,10 +163,7 @@ public class Player_controll : MonoBehaviour
                 if ((enemys[i].transform.position.z > transform.position.z + 10) && (cur_enemy == null || cur_enemy != null && enemys[i].transform.position.z < cur_enemy.transform.position.z))
                 {
                     cur_enemy = enemys[i];
-                }
-                //float singleStep = Player_stats.Instance.up_speed * Time.deltaTime;
-                //Vector3 newDirection = Vector3.RotateTowards(up_anim.gameObject.transform.forward, transform.position, singleStep, 0.0f);
-                //up_anim.gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
+                }                
             }
             max_speed = Player_stats.Instance.move_speed;
         }

@@ -10,12 +10,12 @@ public class Drop_money : MonoBehaviour
     {
         
     }    
-   public void Spawn(int count)
+   public void Spawn()
     {
-        for(int i = 0; i < count; i++)
+        for(int i = 0; i < Random.Range(3, 5); i++)
         {
             GameObject obj = Instantiate(money_prefab, transform.position, money_prefab.transform.rotation) as GameObject;
-            obj.transform.position = new Vector3(transform.position.x + Random.Range(-xx, xx), 0, transform.position.z + Random.Range(-xx, xx));
+            obj.transform.position = new Vector3(transform.position.x + (-3 + (i *2)), 0, transform.position.z + Random.Range(-4, 4));
             //obj.GetComponent<Money>().Drop();
         }
     }

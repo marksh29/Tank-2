@@ -100,7 +100,7 @@ public class Firework_enemy : MonoBehaviour
     public void Dead()
     {
         fire_position.SetActive(false);
-        GetComponent<Drop_money>().Spawn(Random.Range(3, 5));
+        GetComponent<Drop_money>().Spawn();
         dead = true;
         for (int i = 0; i < list.Count; i++)
         {

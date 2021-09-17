@@ -7,7 +7,7 @@ public class Player_hp : MonoBehaviour
 {
     public static Player_hp Instance;
     [SerializeField] Slider life;
-    [SerializeField] GameObject blood, explosion;
+    [SerializeField] GameObject blood, explosion, cam;
     [SerializeField] 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class Player_hp : MonoBehaviour
     }
     public void Damage(float count)
     {
-        print(count);
+        cam.GetComponent<Animator>().SetTrigger("damage");
         life.value -= count;
         StartCoroutine(Blood_on());
 

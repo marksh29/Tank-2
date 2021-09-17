@@ -28,7 +28,10 @@ public class Enemy : MonoBehaviour
 
         if (explos_prefab != null)
             StartCoroutine(Effect_on());
-        
+
+        if(fire_enemy || firework_enemy)
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 5);
+
         if (life <= 0)
         {
             gameObject.tag = "Untagged";
@@ -49,15 +52,16 @@ public class Enemy : MonoBehaviour
             }
             else if (fire_enemy)
             {
-                GetComponent<Fire_enemy>().Dead();             
+                GetComponent<Fire_enemy>().Dead();                
+
             }
             else if (firework_enemy)
             {
-                GetComponent<Firework_enemy>().Dead();           
+                GetComponent<Firework_enemy>().Dead();
             }
             else
             {
-                Destroy(gameObject, 2);
+                Destroy(gameObject, 2);               
             }                
         }           
     }

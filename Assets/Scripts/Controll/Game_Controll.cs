@@ -40,6 +40,15 @@ public class Game_Controll : MonoBehaviour
     {
         money_int += id;
         money_text.text = money_int.ToString();
+        money_text.gameObject.transform.localScale = new Vector3(1, 1, 1);
+        StopAllCoroutines();
+        StartCoroutine(Money_up());
+    }
+    IEnumerator Money_up()
+    {
+        money_text.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        yield return new WaitForSeconds(0.1f);
+        money_text.gameObject.transform.localScale = new Vector3(1, 1, 1);
     }
       
     public void Pause()
