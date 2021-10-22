@@ -6198,3 +6198,4 @@ Received Import Request.
 Start importing Assets/mesh/mat/Tank_1.mat using Guid(6e9814bf257b98c47a3a1e1e98687453) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3867681dffadd556535f4e533b9a3f7') in 0.057260 seconds 
   Import took 0.062189 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
